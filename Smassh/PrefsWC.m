@@ -57,7 +57,7 @@
   [clear setAction:@selector(clear:)];
   [add setAction:@selector(add:)];
   [del setAction:@selector(del:)];
-  [self pickIndex:0];
+  [self pickIndex:-1]; //really, pick the first item or nothing if no shells.
 }
 -(void)pick:(id)sender
 {
