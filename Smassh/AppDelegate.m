@@ -14,6 +14,8 @@
 @synthesize shells;
 @synthesize settings;
 @synthesize notifiables;
+@synthesize statusItem;
+@synthesize statusMenu;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {

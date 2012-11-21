@@ -14,15 +14,14 @@
 #import "Debug.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, Supervisor>
-{
-  IBOutlet NSMenu *statusMenu;
-  NSStatusItem *statusItem;
-}
-@property (nonatomic, readonly) Model *model;
-@property (nonatomic) NSMutableArray *shells;
-@property (nonatomic) NSMutableSet *notifiables;
 
+@property (nonatomic, readonly) IBOutlet NSMenu *statusMenu;
+@property (nonatomic, readonly) NSStatusItem *statusItem;
 @property PrefsWC *settings;
+
+@property (nonatomic, readonly) Model *model;
+@property (nonatomic, readonly) NSMutableArray *shells;
+@property (nonatomic, readonly) NSMutableSet *notifiables;
 
 -(void) runScript:(id) sender;
 -(void) edit:(id)sender;
