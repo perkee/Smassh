@@ -19,7 +19,5 @@
 @property(nonatomic, readonly) NSMutableDictionary *config;
 
 -(id)   init;
--(void) createSupportDir; //I really wish this were private
--(void) createConfigFile; //ditto
 
 @end
