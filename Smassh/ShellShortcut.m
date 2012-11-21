@@ -58,6 +58,13 @@
   return [ShellShortcut buildCommand:self.props];
 }
 
+-(NSDictionary *) toDictionary
+{
+  NSMutableDictionary *temp = [NSMutableDictionary dictionaryWithDictionary:props];
+  [temp setObject:nick forKey:@"nick"];
+  return temp;
+}
+
 +(NSString *) buildCommand:(NSDictionary *)cmdProps
 {
   NSString *user, *host, *init, *cmd;

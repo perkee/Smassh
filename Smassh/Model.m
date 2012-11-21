@@ -23,4 +23,13 @@
   return self;
 }
 
+-(void)notify
+{
+  [config notify];
+}
+-(void)notifyWithType:(NSNumber *)type
+{
+  [config notifyWithType:type];
+}
+
 @end

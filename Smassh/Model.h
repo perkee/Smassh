@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ShellShortcut.h"
 #import "Config.h"
+#import "Notifiable.h"
 
-@interface Model : NSObject
+@interface Model : NSObject <Notifiable>
 
 @property(nonatomic, readonly) Config         *config;
 @property(nonatomic, readonly) NSMutableArray *shells;

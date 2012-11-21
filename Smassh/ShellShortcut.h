@@ -21,6 +21,8 @@
 
 -(NSString *) cmd;
 
+-(NSDictionary *) toDictionary;
+
 +(NSString *) buildCommand: (NSDictionary *) cmdProps; 
 
 @end

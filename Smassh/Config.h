@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "ShellShortcut.h"
+#import "Notifiable.h"
 
-@interface Config : NSObject
+@interface Config : NSObject <Notifiable>
+
 @property(nonatomic, readonly) NSMutableArray *shells;
 
 @property(nonatomic, readonly) NSString *appName;

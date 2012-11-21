@@ -28,7 +28,7 @@
     
     appName = [[bundle infoDictionary] objectForKey:@"CFBundleExecutable"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    supportDir = paths[0];
+    supportDir = [paths[0] stringByExpandingTildeInPath];
     supportDir = [self.supportDir stringByAppendingPathComponent:self.appName];
     
     cfgFile = @"cfg.plist";
@@ -70,7 +70,37 @@
       [shells replaceObjectAtIndex:ii withObject:[[ShellShortcut alloc] initWithProps:[shells objectAtIndex:ii]]];
     }
   }
+  NSLog(@"Config: %@",config);
   return self;
+}
+
+-(NSMutableArray *)dictFromShells:(NSArray *)someShells
+{
+  NSMutableArray *temp = [NSMutableArray arrayWithCapacity:[someShells count]];
+  for(id shell in someShells)
+  {
+    [temp addObject:[shell toDictionary]];
+  }
+  return temp;
+}
+
+-(void)notify
+{
+  [config setObject:[self dictFromShells:shells] forKey:@"shells"];
+  BOOL couldWrite = [config writeToFile:cfgFile atomically:YES];
+  NSLog(@"%@ to config file", couldWrite ? @"Wrote" : @"Didn't write");
+}
+-(void)notifyWithType:(NSNumber *)type
+{
+  if([type integerValue] == NotificationAdded)
+  {
+    [config setObject:[self dictFromShells:shells] forKey:@"shells"];
+    //Don't write to disk just yet—the content is guaranteed to be uninsteresting
+  }
+  else
+  {
+    [self notify];
+  }
 }
 
 @end

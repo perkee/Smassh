@@ -39,7 +39,7 @@
   [settings setSupervisor:self];
   [[settings window] orderOut:self];
   
-  notifiables = [NSMutableSet setWithObject:settings];
+  notifiables = [NSMutableSet setWithObjects:settings,model,nil];
 }
 
 -(void) runScript:(id)sender
