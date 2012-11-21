@@ -16,15 +16,15 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, Supervisor>
 
 @property (nonatomic, readonly) IBOutlet NSMenu *statusMenu;
-@property (nonatomic, readonly) NSStatusItem *statusItem;
-@property PrefsWC *settings;
+@property (nonatomic, readonly) NSStatusItem    *statusItem;
+@property (nonatomic, readonly) PrefsWC         *settings;
 
-@property (nonatomic, readonly) Model *model;
+@property (nonatomic, readonly) Model          *model;
 @property (nonatomic, readonly) NSMutableArray *shells;
-@property (nonatomic, readonly) NSMutableSet *notifiables;
+@property (nonatomic, readonly) NSMutableSet   *notifiables;
 
--(void) runScript:(id) sender;
--(void) edit:(id)sender;
+-(void) runScript: (id)sender;
+-(void) edit:      (id)sender;
 -(void) notifyAll;
 -(void) notifyAllWithType:(notification)type;
 +(void) buildMenu:(NSMenu *) menu withShells: (NSArray *) shells;
