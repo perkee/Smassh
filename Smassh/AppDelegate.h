@@ -19,13 +19,10 @@
   NSStatusItem *statusItem;
 }
 @property (nonatomic, readonly) Model *model;
-
-@property (assign) IBOutlet NSWindow *window;
-@property PrefsWC *settings;
-
 @property (nonatomic) NSMutableArray *shells;
-
 @property (nonatomic) NSMutableSet *notifiables;
+
+@property PrefsWC *settings;
 
 -(void) runScript:(id) sender;
 -(void) edit:(id)sender;
