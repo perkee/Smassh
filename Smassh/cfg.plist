@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>script</key><string>tell application "Terminal"
+	activate
+	do script with command "ssh %@"
+end tell</string>
+  <key>shells</key>
+  <array>
+    <dict>
+      <key>nick</key><string>bloodsword</string>
+      <key>user</key><string>perkee</string>
+      <key>host</key><string>bloodsword.local</string>
+      <key>init</key><string>cat lazerswords.txt</string>
+    </dict>
+    <dict>
+      <key>nick</key><string>Claymore</string>
+      <key>user</key><string>aperkins</string>
+      <key>host</key><string>claymore.local</string>
+      <key>init</key><string>ping 8.8.8.8</string>
+    </dict>
+  </array>
+</dict>
+</plist>
