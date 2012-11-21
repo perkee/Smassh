@@ -16,16 +16,17 @@
 
 @synthesize config;
 
-@synthesize fileManager;
-
 @synthesize shells;
 
 -(id)init
 {
   if(self = [super init])
   {
-    appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSFileManager *fileManager =[NSFileManager defaultManager];
+    NSError *error = [[NSError alloc] init];
     
+    appName = [[bundle infoDictionary] objectForKey:@"CFBundleExecutable"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
     supportDir = paths[0];
     supportDir = [self.supportDir stringByAppendingPathComponent:self.appName];
@@ -33,9 +34,11 @@
     cfgFile = @"cfg.plist";
     cfgFile = [self.supportDir stringByAppendingPathComponent:self.cfgFile];
     
-    fileManager =[NSFileManager defaultManager];
+    NSString *defaultConfigFile = [[NSBundle mainBundle] pathForResource:@"cfg" ofType:@"plist"];
+    
     BOOL isDir;
     BOOL fileExists = [fileManager fileExistsAtPath:supportDir isDirectory:&isDir];
+    
     if(fileExists && isDir)
     {
       //the support directory exists
@@ -45,18 +48,7 @@
       {
         //config file exists
         NSLog(@"Exists cfg file: %@",cfgFile);
-        //load it as a dictionary
-        config = [NSMutableDictionary dictionaryWithContentsOfFile:cfgFile];
-        //shells = [NSMutableArray arrayWithContentsOfFile:cfgFile];
-        shells = [NSMutableArray arrayWithCapacity:[[config objectForKey:@"shells"] count]];
-        [shells addObjectsFromArray:[config objectForKey:@"shells"]];
-        for(NSUInteger ii = 0; ii < [shells count]; ii++)
-        {
-          //replace each Dictionary with a ShellShortcut
-          [shells replaceObjectAtIndex:ii withObject:[[ShellShortcut alloc] initWithProps:[shells objectAtIndex:ii]]];
-        }
-        [config removeObjectForKey:@"shells"];
-        NSLog(@"cleared %@",config);
+        //don't load it or anything here, we do that after taking care of missing pieces
       }
       else
       {
@@ -70,10 +62,10 @@
         {
           //some joker is having a laugh
           //delete it
+          [fileManager removeItemAtPath:cfgFile error:&error];
         }
         //make cfg file
-        //make empty shells array
-        shells = [NSMutableArray array];
+        [fileManager copyItemAtPath:defaultConfigFile toPath:cfgFile error:&error];
       }
     }
     else
@@ -87,12 +79,24 @@
       {
         //some joker is having a laugh
         //delete it
+        [fileManager removeItemAtPath:supportDir error:&error];
       }
       //make dir, make cfg file
-      //make empty shells array
-      shells = [NSMutableArray array];
+      [fileManager createDirectoryAtPath:supportDir withIntermediateDirectories:YES attributes:nil error:&error];
+      [fileManager copyItemAtPath:defaultConfigFile toPath:cfgFile error:&error];
     }
   }
+  //load it as a dictionary
+  config = [NSMutableDictionary dictionaryWithContentsOfFile:cfgFile];
+  shells = [NSMutableArray arrayWithCapacity:[[config objectForKey:@"shells"] count]];
+  [shells addObjectsFromArray:[config objectForKey:@"shells"]];
+  for(NSUInteger ii = 0; ii < [shells count]; ii++)
+  {
+    //replace each Dictionary with a ShellShortcut
+    [shells replaceObjectAtIndex:ii withObject:[[ShellShortcut alloc] initWithProps:[shells objectAtIndex:ii]]];
+  }
+  [config removeObjectForKey:@"shells"];
+  NSLog(@"cleared %@",config);
   return self;
 }
 
@@ -104,12 +108,6 @@
 -(void)createSupportDir
 {
   
-}
-
--(void)printPath
-{
-  NSLog(@"path: %@",cfgFile);
-  //[self printShells];
 }
 
 @end

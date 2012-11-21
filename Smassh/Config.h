@@ -18,10 +18,7 @@
 
 @property(nonatomic, readonly) NSMutableDictionary *config;
 
-@property(nonatomic, readonly) NSFileManager *fileManager;
-
 -(id)   init;
--(void) printPath;
 -(void) createSupportDir; //I really wish this were private
 -(void) createConfigFile; //ditto
 
