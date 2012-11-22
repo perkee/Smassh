@@ -5,7 +5,7 @@
 	<key>script</key>
 	<string>tell application &quot;Terminal&quot;
 	activate
-	do script with command &quot;ssh %@&quot;
+	do script with command &quot;ssh -t %@&quot;
 end tell</string>
 	<key>shells</key>
 	<array/>
