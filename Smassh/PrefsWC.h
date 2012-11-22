@@ -11,7 +11,7 @@
 #import "Supervisor.h"
 #import "Notifiable.h"
 
-@interface PrefsWC : NSWindowController <NSTableViewDataSource, Notifiable>
+@interface PrefsWC : NSWindowController <NSTableViewDataSource, Notifiable, NSTextFieldDelegate>
 @property(nonatomic) NSMutableArray *shells;
 
 @property(nonatomic) id <Supervisor> supervisor;

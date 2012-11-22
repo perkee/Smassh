@@ -59,6 +59,7 @@
   [clear setAction:@selector(clear:)];
   [add setAction:@selector(add:)];
   [del setAction:@selector(del:)];
+  [portField setDelegate:self];
   [self pickIndex:-1]; //really, pick the first item or nothing if no shells.
   
   textFields = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -184,4 +185,12 @@
 {
   return [[shells objectAtIndex:rowIndex] nick];
 }
+
+//textFiledDelegate stuff
+
+-(void)controlTextDidChange:(NSNotification *)obj
+{
+  [[obj object] setStringValue:[NSString stringWithFormat:@"%ld",[[[obj object] stringValue] integerValue]]];
+}
+
 @end
