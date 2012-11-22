@@ -47,6 +47,7 @@
                     @"",@"user",
                     @"",@"host",
                     @"",@"init",
+                    nil,@"port",
                     nil];
     }
   }
@@ -67,7 +68,11 @@
 
 +(NSString *) buildCommand:(NSDictionary *)cmdProps
 {
-  NSString *user, *host, *init, *cmd;
+  NSString *port = @"",
+           *user = @"",
+           *host,
+           *init = @"",
+           *cmd = @"#If you don't provide a host there is no command";
   
   id prop = [cmdProps objectForKey:@"host"];
   if(prop != nil && [prop isKindOfClass:[NSString class]] && [prop length] > 0)
@@ -78,24 +83,17 @@
     {
       user = [NSString stringWithFormat:@"%@@",prop];
     }
-    else
-    {
-      user = @"";
-    }
     prop = [cmdProps objectForKey:@"init"];
     if(prop != nil && [prop isKindOfClass:[NSString class]] && [prop length] > 0)
     {
-      init = [NSString stringWithFormat:@" %@;sh -i",prop];
+      init = [NSString stringWithFormat:@" '%@;bash -il'",prop];
     }
-    else
+    prop = [cmdProps objectForKey:@"port"];
+    if(prop != nil && [prop isKindOfClass:[NSNumber class]])
     {
-      init = @"";
+      port = [NSString stringWithFormat:@" -t %@", prop];
     }
     cmd = [NSString stringWithFormat:@"%@%@%@",user,host,init];
-  }
-  else
-  {
-    cmd = @"";
   }
   return cmd;
 }
