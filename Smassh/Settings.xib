@@ -45,7 +45,7 @@
 				<int key="NSWindowStyleMask">3</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{559, 608}, {480, 270}}</string>
-				<int key="NSWTFlags">-1602748416</int>
+				<int key="NSWTFlags">1618477056</int>
 				<string key="NSWindowTitle">Settings</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
@@ -68,7 +68,7 @@
 											<string key="NSFrameSize">{120, 209}</string>
 											<reference key="NSSuperview" ref="405183792"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="860884889"/>
+											<reference key="NSNextKeyView" ref="592942871"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -203,7 +203,7 @@
 							<string key="NSFrame">{{20, 41}, {120, 209}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="592942871"/>
+							<reference key="NSNextKeyView" ref="405183792"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<int key="NSsFlags">150032</int>
 							<reference key="NSVScroller" ref="860884889"/>
@@ -409,7 +409,6 @@
 							<string key="NSFrame">{{390, 12}, {70, 19}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="146736157">

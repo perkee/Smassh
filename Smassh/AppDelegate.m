@@ -55,7 +55,7 @@
 }
 -(void) edit:(id)sender
 {
-  [[settings window] orderFront:self];
+  [[settings window] makeKeyAndOrderFront:self];
 }
 -(void) addShell:(ShellShortcut *)shell
 {
