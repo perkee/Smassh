@@ -21,6 +21,7 @@
 @synthesize supervisor;
 @synthesize add;
 @synthesize del;
+@synthesize textFields;
 
 -(id) initWithShells:(NSMutableArray *)someShells
 {
@@ -58,6 +59,14 @@
   [add setAction:@selector(add:)];
   [del setAction:@selector(del:)];
   [self pickIndex:-1]; //really, pick the first item or nothing if no shells.
+  
+  textFields = [NSDictionary dictionaryWithObjectsAndKeys:
+                nickField, @"nick",
+                userField, @"user",
+                hostField, @"host",
+                initField, @"init",
+                nil];
+  [self setUsable:([shells count] != 0)];
 }
 -(void)pick:(id)sender
 {
@@ -126,12 +135,24 @@
   [self pick:table];
 }
 
+-(void)setUsable:(BOOL)flag;
+{
+  for(id key in textFields)
+  {
+    id field = [textFields objectForKey:key];
+    [field setEditable:flag];
+    [field setEnabled:flag];
+    [field setSelectable:flag];
+  }
+  [del setEnabled:flag];
+}
+
 //Here begin the Notify methods
 
 -(void)notify
 {
   [table reloadData];
-  NSLog(@"window got notified");
+  [self setUsable:([shells count] != 0)];
 }
 -(void)notifyWithType:(NSNumber *)type
 {

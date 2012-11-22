@@ -27,6 +27,8 @@
 
 -(void)pickIndex:(NSUInteger) index;
 
+-(void)setUsable:(BOOL)flag;
+
 @property(nonatomic) IBOutlet NSTableView *table;
 @property(nonatomic) IBOutlet NSTextField *nickField;
 @property(nonatomic) IBOutlet NSTextField *userField;
@@ -39,5 +41,7 @@
 
 @property(nonatomic) IBOutlet NSButton *add;
 @property(nonatomic) IBOutlet NSButton *del;
+
+@property(nonatomic) NSDictionary *textFields;
 
 @end
