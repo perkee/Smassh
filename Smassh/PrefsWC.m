@@ -123,7 +123,7 @@
 }
 -(void)clear:(id)sender
 {
-  NSLog(@"clear: %@",sender);
+  [self pick:table];
 }
 
 //Here begin the Notify methods
