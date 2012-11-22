@@ -190,7 +190,15 @@
 
 -(void)controlTextDidChange:(NSNotification *)obj
 {
-  [[obj object] setStringValue:[NSString stringWithFormat:@"%ld",[[[obj object] stringValue] integerValue]]];
+  NSUInteger value = [[[obj object] stringValue] integerValue];
+  if(value <= 0)
+  {
+    [[obj object] setStringValue:@""];
+  }
+  else
+  {
+    [[obj object] setStringValue:[NSString stringWithFormat:@"%ld",value]];
+  }
 }
 
 @end
