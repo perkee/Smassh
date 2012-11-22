@@ -14,6 +14,7 @@
 @synthesize userField;
 @synthesize hostField;
 @synthesize initField;
+@synthesize portField;
 @synthesize table;
 @synthesize save;
 @synthesize apply;
@@ -65,6 +66,7 @@
                 userField, @"user",
                 hostField, @"host",
                 initField, @"init",
+                portField, @"port",
                 nil];
   [self setUsable:([shells count] != 0)];
 }
@@ -87,6 +89,7 @@
       [userField setStringValue:@""];
       [hostField setStringValue:@""];
       [initField setStringValue:@""];
+      [portField setStringValue:@""];
     }
   }
   else
@@ -97,6 +100,7 @@
     [userField setStringValue:[[shell props] objectForKey:@"user"]];
     [hostField setStringValue:[[shell props] objectForKey:@"host"]];
     [initField setStringValue:[[shell props] objectForKey:@"init"]];
+    [portField setStringValue:[[shell props] objectForKey:@"port"]];
   }
 }
 
@@ -127,6 +131,7 @@
                                                              userField.stringValue, @"user",
                                                              hostField.stringValue, @"host",
                                                              initField.stringValue, @"init",
+                                                             portField.stringValue, @"port",
                                                              nil]];
   [supervisor saveShell:tmp atIndex:[[self table] selectedRow]];
 }

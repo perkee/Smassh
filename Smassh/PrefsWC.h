@@ -34,6 +34,7 @@
 @property(nonatomic) IBOutlet NSTextField *userField;
 @property(nonatomic) IBOutlet NSTextField *hostField;
 @property(nonatomic) IBOutlet NSTextField *initField;
+@property(nonatomic) IBOutlet NSTextField *portField;
 
 @property(nonatomic) IBOutlet NSButton *save;
 @property(nonatomic) IBOutlet NSButton *apply;

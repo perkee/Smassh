@@ -47,7 +47,7 @@
                     @"",@"user",
                     @"",@"host",
                     @"",@"init",
-                    nil,@"port",
+                    @"",@"port",
                     nil];
     }
   }
@@ -89,11 +89,11 @@
       init = [NSString stringWithFormat:@" '%@;bash -il'",prop];
     }
     prop = [cmdProps objectForKey:@"port"];
-    if(prop != nil && [prop isKindOfClass:[NSNumber class]])
+    if(prop != nil && [prop isKindOfClass:[NSString class]])
     {
-      port = [NSString stringWithFormat:@" -t %@", prop];
+      port = [NSString stringWithFormat:@" -p %@ ", prop];
     }
-    cmd = [NSString stringWithFormat:@"%@%@%@",user,host,init];
+    cmd = [NSString stringWithFormat:@"%@%@%@%@",port,user,host,init];
   }
   return cmd;
 }
