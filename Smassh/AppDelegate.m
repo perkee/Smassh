@@ -16,6 +16,7 @@
 @synthesize notifiables;
 @synthesize statusItem;
 @synthesize statusMenu;
+@synthesize statusImage;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -34,7 +35,7 @@
   
   statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
   [statusItem setMenu:statusMenu];
-  [statusItem setTitle:@"SG"];
+  //[statusItem setTitle:@"SG"];
   [statusItem setHighlightMode:YES];
   
   settings = [[PrefsWC alloc] initWithShells:shells];
@@ -42,6 +43,11 @@
   [[settings window] orderOut:self];
   
   notifiables = [NSMutableSet setWithObjects:settings,model,nil];
+  
+  NSString *imgPath = [[NSBundle mainBundle] pathForResource:@"icon_32x32@2x" ofType:@"png"];
+  NSLog(@"loading image: %@",imgPath);
+  statusImage = [[NSImage alloc] initWithContentsOfFile:imgPath];
+  [statusItem setImage:statusImage];
 }
 
 -(void) runScript:(id)sender

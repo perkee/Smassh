@@ -18,6 +18,7 @@
 @property (nonatomic, readonly) IBOutlet NSMenu *statusMenu;
 @property (nonatomic, readonly) NSStatusItem    *statusItem;
 @property (nonatomic, readonly) PrefsWC         *settings;
+@property (nonatomic, readonly) NSImage         *statusImage;
 
 @property (nonatomic, readonly) Model          *model;
 @property (nonatomic, readonly) NSMutableArray *shells;
