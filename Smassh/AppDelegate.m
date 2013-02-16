@@ -66,8 +66,7 @@
 }
 -(void) edit:(id)sender
 {
-  [[settings window] makeKeyAndOrderFront:self];
-  [NSApp activateIgnoringOtherApps:YES];
+  [settings activate];
 }
 -(void) addShell:(ShellShortcut *)shell
 {

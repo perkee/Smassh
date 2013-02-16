@@ -36,6 +36,11 @@
   }
   return self;
 }
+-(void)activate
+{
+  [[self window] makeKeyAndOrderFront:self];
+  [NSApp activateIgnoringOtherApps:YES];
+}
 
 - (void)windowDidLoad
 {
@@ -152,7 +157,7 @@
 {
   [self pick:table];
 }
-
+//Allow use of text fields
 -(void)setUsable:(BOOL)flag;
 {
   for(id key in textFields)

@@ -18,6 +18,9 @@
 
 -(id)initWithShells:(NSMutableArray *) someShells;
 
+-(void)activate;
+
+//shell manipulation methods
 -(void)save:(id)sender;
 -(void)apply:(id)sender;
 -(void)pick:(id)sender;
@@ -25,25 +28,26 @@
 -(void)add:(id)sender;
 -(void)del:(id)sender;
 
+//User interaction methods
 -(void)pickIndex:(NSUInteger) index;
-
 -(void)setUsable:(BOOL)flag;
 
+//textfields
+@property(nonatomic) NSDictionary *textFields; //to loop through them all at once
 @property(nonatomic) IBOutlet NSTableView *table;
 @property(nonatomic) IBOutlet NSTextField *nickField;
 @property(nonatomic) IBOutlet NSTextField *userField;
 @property(nonatomic) IBOutlet NSTextField *hostField;
 @property(nonatomic) IBOutlet NSTextField *initField;
 @property(nonatomic) IBOutlet NSTextField *portField;
-@property(nonatomic) IBOutlet NSTextField *starter;
+@property(nonatomic) IBOutlet NSTextField *starter; //popover when there are no shells
 
+//buttons for changing shells
 @property(nonatomic) IBOutlet NSButton *save;
 @property(nonatomic) IBOutlet NSButton *apply;
 @property(nonatomic) IBOutlet NSButton *clear;
-
+//Buttons for adding/removing to/from shell list
 @property(nonatomic) IBOutlet NSButton *add;
 @property(nonatomic) IBOutlet NSButton *del;
-
-@property(nonatomic) NSDictionary *textFields;
 
 @end
