@@ -35,7 +35,6 @@
   
   statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
   [statusItem setMenu:statusMenu];
-  //[statusItem setTitle:@"SG"];
   [statusItem setHighlightMode:YES];
   
   settings = [[PrefsWC alloc] initWithShells:shells];
@@ -45,7 +44,10 @@
   notifiables = [NSMutableSet setWithObjects:settings,model,nil];
   
   NSString *imgPath = [[NSBundle mainBundle] pathForResource:@"icon_32x32@2x" ofType:@"png"];
-  NSLog(@"loading image: %@",imgPath);
+  if(VERBOSE)
+  {
+    NSLog(@"loading image: %@",imgPath);
+  }
   statusImage = [[NSImage alloc] initWithContentsOfFile:imgPath];
   [statusItem setImage:statusImage];
 }
@@ -65,6 +67,7 @@
 -(void) edit:(id)sender
 {
   [[settings window] makeKeyAndOrderFront:self];
+  [NSApp activateIgnoringOtherApps:YES];
 }
 -(void) addShell:(ShellShortcut *)shell
 {

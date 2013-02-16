@@ -32,6 +32,7 @@
   if(self = [super initWithWindowNibName:@"Settings"])
   {
     shells = someShells;
+    [self.window setDelegate:self];
   }
   return self;
 }
@@ -69,6 +70,16 @@
                 nil];
   [self setUsable:([shells count] != 0)];
 }
+
+- (void) windowDidResignKey:(NSNotification *)notification
+{
+  if(VERBOSE)
+  {
+    NSLog(@"window blur.");
+  }
+  [self.window orderOut:self];
+}
+
 -(void)pick:(id)sender
 {
   [self pickIndex:[sender selectedRow]];

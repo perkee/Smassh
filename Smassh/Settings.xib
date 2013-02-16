@@ -42,10 +42,10 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSWindowTemplate" id="1005">
-				<int key="NSWindowStyleMask">257</int>
+				<int key="NSWindowStyleMask">3</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{559, 608}, {480, 270}}</string>
-				<int key="NSWTFlags">1618477056</int>
+				<int key="NSWTFlags">544735232</int>
 				<string key="NSWindowTitle">Settings</string>
 				<string key="NSWindowClass">NSPanel</string>
 				<nil key="NSViewClass"/>
@@ -620,10 +620,7 @@ dGVkLg</string>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
-				<bool key="NSAutorecalculatesContentBorderThicknessMinY">NO</bool>
-				<bool key="NSAutorecalculatesContentBorderThicknessMaxY">NO</bool>
-				<double key="NSContentBorderThicknessMaxY">256</double>
-				<bool key="NSWindowIsRestorable">YES</bool>
+				<bool key="NSWindowIsRestorable">NO</bool>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -1251,7 +1248,7 @@ dGVkLg</string>
 								<float key="scoringTypeFloat">24</float>
 								<int key="contentType">2</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="55104034">
+							<object class="IBNSLayoutConstraint" id="129080407">
 								<reference key="firstItem" ref="475696423"/>
 								<int key="firstAttribute">3</int>
 								<int key="relation">0</int>
@@ -1267,7 +1264,7 @@ dGVkLg</string>
 								<float key="scoringTypeFloat">24</float>
 								<int key="contentType">2</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="379961243">
+							<object class="IBNSLayoutConstraint" id="535127438">
 								<reference key="firstItem" ref="1006"/>
 								<int key="firstAttribute">4</int>
 								<int key="relation">0</int>
@@ -1395,7 +1392,7 @@ dGVkLg</string>
 								<float key="scoringTypeFloat">24</float>
 								<int key="contentType">2</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="958917215">
+							<object class="IBNSLayoutConstraint" id="577296811">
 								<reference key="firstItem" ref="816355335"/>
 								<int key="firstAttribute">4</int>
 								<int key="relation">0</int>
@@ -2120,12 +2117,12 @@ dGVkLg</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">442</int>
-						<reference key="object" ref="379961243"/>
+						<reference key="object" ref="535127438"/>
 						<reference key="parent" ref="1006"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">443</int>
-						<reference key="object" ref="55104034"/>
+						<reference key="object" ref="129080407"/>
 						<reference key="parent" ref="1006"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -2205,7 +2202,7 @@ dGVkLg</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">459</int>
-						<reference key="object" ref="958917215"/>
+						<reference key="object" ref="577296811"/>
 						<reference key="parent" ref="1006"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -2246,7 +2243,7 @@ dGVkLg</string>
 				<string key="-3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1.IBWindowTemplateEditedContentRect">{{357, 418}, {480, 270}}</string>
-				<boolean value="YES" key="1.NSWindowTemplate.visibleAtLaunch"/>
+				<boolean value="NO" key="1.NSWindowTemplate.visibleAtLaunch"/>
 				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="10.isInViewBasedMode"/>
 				<array key="104.IBNSViewMetadataConstraints">
@@ -2289,7 +2286,7 @@ dGVkLg</string>
 					<reference ref="236290162"/>
 					<reference ref="151338633"/>
 					<reference ref="649339155"/>
-					<reference ref="958917215"/>
+					<reference ref="577296811"/>
 					<reference ref="941541516"/>
 					<reference ref="35567922"/>
 					<reference ref="940348481"/>
@@ -2297,8 +2294,8 @@ dGVkLg</string>
 					<reference ref="923313031"/>
 					<reference ref="649878819"/>
 					<reference ref="796948684"/>
-					<reference ref="379961243"/>
-					<reference ref="55104034"/>
+					<reference ref="535127438"/>
+					<reference ref="129080407"/>
 					<reference ref="549991081"/>
 					<reference ref="330590542"/>
 					<reference ref="349936481"/>
