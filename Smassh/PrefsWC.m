@@ -15,6 +15,7 @@
 @synthesize hostField;
 @synthesize initField;
 @synthesize portField;
+@synthesize starter;
 @synthesize table;
 @synthesize save;
 @synthesize apply;
@@ -23,6 +24,8 @@
 @synthesize add;
 @synthesize del;
 @synthesize textFields;
+
+#define VERBOSE NO
 
 -(id) initWithShells:(NSMutableArray *)someShells
 {
@@ -36,11 +39,7 @@
 - (void)windowDidLoad
 {
   [super windowDidLoad];
-    
-  // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-  
-  //NSView *sView = [self.window contentView];
-  //NSLog(@"w: %f h: %f",self.window.frame.size.width,self.window.frame.size.height);
+
   CGFloat buttonW = 75, buttonH = 30, margin = 10;
   CGFloat buttonX = self.window.frame.size.width - buttonW - margin;
   
@@ -49,8 +48,7 @@
   [button setTitle:@"Save"];
   [button setTarget:self];
   [button setAction:@selector(save:)];
-  //[sView addSubview:button];
-  //NSTableView *table = [[[[[[sView subviews] objectAtIndex:0] subviews] objectAtIndex:0] subviews] objectAtIndex:0];//BOO YOU WHORE
+
   [table setAction:@selector(pick:)];
   [table selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
   
@@ -96,7 +94,10 @@
   else
   {
     ShellShortcut *shell = [shells objectAtIndex:index];
-    NSLog(@"display info from shell: %@",[[shells objectAtIndex:index] nick]);
+    if(VERBOSE)
+    {
+      NSLog(@"display info from shell: %@",[[shells objectAtIndex:index] nick]);
+    }
     [nickField setStringValue:[shell nick]];
     [userField setStringValue:[[shell props] objectForKey:@"user"]];
     [hostField setStringValue:[[shell props] objectForKey:@"host"]];
@@ -178,6 +179,14 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
+  if([shells count] > 0)
+  {
+    [starter setHidden:YES];
+  }
+  else
+  {
+    [starter setHidden:NO];
+  }
   return [shells count];
 }
 
@@ -186,7 +195,7 @@
   return [[shells objectAtIndex:rowIndex] nick];
 }
 
-//textFiledDelegate stuff
+//textFieldDelegate stuff
 
 -(void)controlTextDidChange:(NSNotification *)obj
 {

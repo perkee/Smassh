@@ -7,6 +7,7 @@
 //
 
 #import "Config.h"
+#define VERBOSE NO
 
 @implementation Config
 
@@ -70,7 +71,10 @@
       [shells replaceObjectAtIndex:ii withObject:[[ShellShortcut alloc] initWithProps:[shells objectAtIndex:ii]]];
     }
   }
-  NSLog(@"Config: %@",config);
+  if(VERBOSE)
+  {
+    NSLog(@"Config: %@",config);
+  }
   return self;
 }
 

@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "ShellMenuItem.h"
 
+#define VERBOSE NO
+
 @implementation AppDelegate
 @synthesize model;
 @synthesize shells;
@@ -20,13 +22,11 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-  NSLog(@"adfl");
   // Insert code here to initialize your application
   //awakeFromNib runs before this, so all the init is in there.
 }
 - (void) awakeFromNib
 {
-  NSLog(@"afn");
   
   model  = [[Model alloc] init];
   shells = [model shells];
@@ -57,7 +57,10 @@
   NSDictionary* errorDict;
   NSAppleScript* aScript = [[NSAppleScript alloc] initWithSource:script];
   NSAppleEventDescriptor *returnDescriptor = [aScript executeAndReturnError:&errorDict];
-  NSLog(@"ed: %@\nevent: %@",errorDict,returnDescriptor);
+  if(VERBOSE)
+  {
+    NSLog(@"ed: %@\nevent: %@",errorDict,returnDescriptor);
+  }
 }
 -(void) edit:(id)sender
 {
@@ -65,7 +68,10 @@
 }
 -(void) addShell:(ShellShortcut *)shell
 {
-  NSLog(@"Adding %@",shell);
+  if(VERBOSE)
+  {
+    NSLog(@"Adding %@",shell);
+  }
   [shells addObject:shell];
   [Debug printShells:shells];
   [self notifyAllWithType:NotificationAdded];
@@ -74,7 +80,10 @@
 
 -(void) saveShell:(ShellShortcut *)shell atIndex:(NSUInteger)index
 {
-  NSLog(@"Saving at %lu: %@",index,shell);
+  if(VERBOSE)
+  {
+    NSLog(@"Saving at %lu: %@",index,shell);
+  }
   [shells replaceObjectAtIndex:index withObject:shell];
   [Debug printShells:shells];
   [self notifyAll];

@@ -12,6 +12,8 @@
 @synthesize nick;
 @synthesize props;
 
+#define VERBOSE YES
+
 -(id)init
 {
   return [self initWithNick:nil andProps:nil];
@@ -89,8 +91,12 @@
       init = [NSString stringWithFormat:@" '%@;bash -il'",prop];
     }
     prop = [cmdProps objectForKey:@"port"];
-    if(prop != nil && [prop isKindOfClass:[NSString class]])
+    if(prop != nil && [prop isKindOfClass:[NSString class]] && [prop length] > 0)
     {
+      if(VERBOSE)
+      {
+        NSLog(@"Non-empty port: %@", prop);
+      }
       port = [NSString stringWithFormat:@" -p %@ ", prop];
     }
     cmd = [NSString stringWithFormat:@"%@%@%@%@",port,user,host,init];
