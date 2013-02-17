@@ -92,7 +92,10 @@
 {
   [config setObject:[self dictFromShells:shells] forKey:@"shells"];
   BOOL couldWrite = [config writeToFile:cfgFile atomically:YES];
-  NSLog(@"%@ to config file", couldWrite ? @"Wrote" : @"Didn't write");
+  if(VERBOSE)
+  {
+    NSLog(@"%@ to config file", couldWrite ? @"Wrote" : @"Didn't write");
+  }
 }
 -(void)notifyWithType:(NSNumber *)type
 {
