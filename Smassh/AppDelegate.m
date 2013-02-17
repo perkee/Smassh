@@ -55,12 +55,12 @@
 -(void) runScript:(id)sender
 {
   NSString *script = [NSString stringWithFormat:[[[model config] config] objectForKey:@"script"],[[sender shell] cmd]];
-  NSLog(@"running script for %@:\n%@",[[sender shell] nick], script);
   NSDictionary* errorDict;
   NSAppleScript* aScript = [[NSAppleScript alloc] initWithSource:script];
   NSAppleEventDescriptor *returnDescriptor = [aScript executeAndReturnError:&errorDict];
   if(VERBOSE)
   {
+    NSLog(@"running script for %@:\n%@",[[sender shell] nick], script);
     NSLog(@"ed: %@\nevent: %@",errorDict,returnDescriptor);
   }
 }

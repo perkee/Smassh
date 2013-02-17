@@ -107,9 +107,9 @@
   else if([type integerValue] == NotificationScript)
   {
     BOOL couldWrite = [config writeToFile:cfgFile atomically:YES];
-    NSLog(@"New applescript:\n%@",[config objectForKey:@"script"]);
     if(VERBOSE)
     {
+      NSLog(@"New applescript:\n%@",[config objectForKey:@"script"]);
       NSLog(@"%@ to config file", couldWrite ? @"Wrote" : @"Didn't write");
     }
   }
