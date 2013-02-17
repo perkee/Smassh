@@ -73,9 +73,9 @@
   if(VERBOSE)
   {
     NSLog(@"Adding %@",shell);
+    [Debug printShells:shells];
   }
   [shells addObject:shell];
-  [Debug printShells:shells];
   [self notifyAllWithType:NotificationAdded];
   [AppDelegate buildMenu:statusMenu withShells:shells];
 }
@@ -85,17 +85,20 @@
   if(VERBOSE)
   {
     NSLog(@"Saving at %lu: %@",index,shell);
+    [Debug printShells:shells];
   }
   [shells replaceObjectAtIndex:index withObject:shell];
-  [Debug printShells:shells];
   [self notifyAll];
   [AppDelegate buildMenu:statusMenu withShells:shells];
 }
 -(void) deleteShellAtIndex:(NSUInteger)index
 {
-  NSLog(@"Deleting at %lu",index);
+  if(VERBOSE)
+  {
+    NSLog(@"Deleting at %lu",index);
+    [Debug printShells:shells];
+  }
   [shells removeObjectAtIndex:index];
-  [Debug printShells:shells];
   [self notifyAll];
   [AppDelegate buildMenu:statusMenu withShells:shells];
 }
