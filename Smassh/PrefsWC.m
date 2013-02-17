@@ -94,6 +94,7 @@
   [start setAction:@selector(add:)];
   [blankButtonCell setHighlightsBy:NSNoCellMask];//on click do nothing; it looks like a gradient bar now.
   [portField setDelegate:self];
+  [scriptField setDelegate:self];
   [self pickIndex:-1]; //really, pick the first item or nothing if no shells.
   
   textFields    = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -299,24 +300,55 @@
   return r;
 }
 
-//textFieldDelegate stuff
-
--(void)controlTextDidChange:(NSNotification *)obj
-{
-  NSUInteger value = [[[obj object] stringValue] integerValue];
-  if(value <= 0)
-  {
-    [[obj object] setStringValue:@""];
-  }
-  else
-  {
-    [[obj object] setStringValue:[NSString stringWithFormat:@"%ld",value]];
-  }
-}
-
 -(void)saveSettings
 {
   [supervisor setScript:[scriptField stringValue]];
 }
 
+//textFieldDelegate stuff
+
+-(void)controlTextDidChange:(NSNotification *)obj
+{
+  if([obj object] == self.portField)
+  {
+    NSUInteger value = [[[obj object] stringValue] integerValue];
+    if(value <= 0)
+    {
+      [[obj object] setStringValue:@""];
+    }
+    else
+    {
+      [[obj object] setStringValue:[NSString stringWithFormat:@"%ld",value]];
+    }
+  }
+  else if([obj object] == self.scriptField)
+  {
+    //NSLog(@"script %@",obj);
+  }
+}
+
+- (BOOL)control:(NSControl*)control textView:(NSTextView*)textView doCommandBySelector:(SEL)commandSelector
+{
+  //NSLog(@"selector\n%@",commandSelector);
+  BOOL result = NO;
+  if(control == scriptField)
+  {
+    if (commandSelector == @selector(insertNewline:))
+    {
+      // new line action:
+      // always insert a line-break character and don’t cause the receiver to end editing
+      [textView insertNewlineIgnoringFieldEditor:self];
+      result = YES;
+    }
+    else if (commandSelector == @selector(insertTab:))
+    {
+      // tab action:
+      // always insert a tab character and don’t cause the receiver to end editing
+      [textView insertTabIgnoringFieldEditor:self];
+      result = YES;
+    }
+  }
+  
+  return result;
+}
 @end
