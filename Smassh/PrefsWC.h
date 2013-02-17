@@ -32,9 +32,10 @@
 -(void)pickIndex:(NSUInteger) index;
 -(void)setUsable:(BOOL)flag;
 
+@property (weak) IBOutlet NSScrollView *tableScroller;
+@property(nonatomic) IBOutlet NSTableView *table;
 //textfields
 @property(nonatomic) NSDictionary *textFields; //to loop through them all at once
-@property(nonatomic) IBOutlet NSTableView *table;
 @property(nonatomic) IBOutlet NSTextField *nickField;
 @property(nonatomic) IBOutlet NSTextField *userField;
 @property(nonatomic) IBOutlet NSTextField *hostField;
@@ -42,7 +43,16 @@
 @property(nonatomic) IBOutlet NSTextField *portField;
 @property(nonatomic) IBOutlet NSTextField *starter; //popover when there are no shells
 
+//labels
+@property(nonatomic) NSDictionary *labels;
+@property(nonatomic) IBOutlet NSTextField *nickLabel;
+@property(nonatomic) IBOutlet NSTextField *userLabel;
+@property(nonatomic) IBOutlet NSTextField *hostLabel;
+@property(nonatomic) IBOutlet NSTextField *initLabel;
+@property(nonatomic) IBOutlet NSTextField *portLabel;
+
 //buttons for changing shells
+@property(nonatomic) NSDictionary *windowButtons;
 @property(nonatomic) IBOutlet NSButton *save;
 @property(nonatomic) IBOutlet NSButton *apply;
 @property(nonatomic) IBOutlet NSButton *clear;

@@ -9,21 +9,35 @@
 #import "PrefsWC.h"
 
 @implementation PrefsWC
+
 @synthesize shells;
+
+@synthesize textFields;
 @synthesize nickField;
 @synthesize userField;
 @synthesize hostField;
 @synthesize initField;
 @synthesize portField;
+
 @synthesize starter;
+
+@synthesize tableScroller;
 @synthesize table;
+
+@synthesize windowButtons;
 @synthesize save;
 @synthesize apply;
 @synthesize clear;
 @synthesize supervisor;
 @synthesize add;
 @synthesize del;
-@synthesize textFields;
+
+@synthesize labels;
+@synthesize nickLabel;
+@synthesize userLabel;
+@synthesize hostLabel;
+@synthesize initLabel;
+@synthesize portLabel;
 
 #define VERBOSE NO
 
@@ -40,6 +54,10 @@
 {
   [[self window] makeKeyAndOrderFront:self];
   [NSApp activateIgnoringOtherApps:YES];
+  if(0 == [shells count])
+  {
+    [self add:self];
+  }
 }
 
 - (void)windowDidLoad
@@ -66,13 +84,25 @@
   [portField setDelegate:self];
   [self pickIndex:-1]; //really, pick the first item or nothing if no shells.
   
-  textFields = [NSDictionary dictionaryWithObjectsAndKeys:
-                nickField, @"nick",
-                userField, @"user",
-                hostField, @"host",
-                initField, @"init",
-                portField, @"port",
-                nil];
+  textFields    = [NSDictionary dictionaryWithObjectsAndKeys:
+                   nickField, @"nick",
+                   userField, @"user",
+                   hostField, @"host",
+                   initField, @"init",
+                   portField, @"port",
+                   nil];
+  labels        = [NSDictionary dictionaryWithObjectsAndKeys:
+                   nickLabel, @"nick",
+                   userLabel, @"user",
+                   hostLabel, @"host",
+                   initLabel, @"init",
+                   portLabel, @"port",
+                   nil];
+  windowButtons = [NSDictionary dictionaryWithObjectsAndKeys:
+                   clear, @"clear",
+                   apply, @"apply",
+                   save,  @"save",
+                   nil];
   [self setUsable:([shells count] != 0)];
 }
 
@@ -125,6 +155,10 @@
 -(void)add:(id)sender
 {
   NSLog(@"add");
+  if([shells count] > 0)
+  {
+    [self apply:sender];
+  }
   [supervisor addShell:[[ShellShortcut alloc] init]];
 }
 -(void)del:(id)sender
@@ -157,17 +191,23 @@
 {
   [self pick:table];
 }
-//Allow use of text fields
+//Allow use of text fields and list
 -(void)setUsable:(BOOL)flag;
 {
   for(id key in textFields)
   {
-    id field = [textFields objectForKey:key];
-    [field setEditable:flag];
-    [field setEnabled:flag];
-    [field setSelectable:flag];
+    [[textFields objectForKey:key] setHidden:!flag];
   }
-  [del setEnabled:flag];
+  for(id key in labels)
+  {
+    [[labels objectForKey:key] setHidden:!flag];
+  }
+  for(id key in windowButtons)
+  {
+    [[windowButtons objectForKey:key] setHidden:!flag];
+  }
+  [tableScroller setHidden:!flag];
+  [del setHidden:!flag];
 }
 
 //Here begin the Notify methods
@@ -175,7 +215,8 @@
 -(void)notify
 {
   [table reloadData];
-  [self setUsable:([shells count] != 0)];
+  NSUInteger count = [shells count];
+  [self setUsable:(count != 0)];
 }
 -(void)notifyWithType:(NSNumber *)type
 {
@@ -195,15 +236,9 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-  if([shells count] > 0)
-  {
-    [starter setHidden:YES];
-  }
-  else
-  {
-    [starter setHidden:NO];
-  }
-  return [shells count];
+  NSUInteger count = [shells count];
+  [starter setHidden:(count!=0)];
+  return count;
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
