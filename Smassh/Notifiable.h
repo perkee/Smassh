@@ -11,7 +11,8 @@
 @protocol Notifiable <NSObject>
 typedef enum {
   NotificationNormal,
-  NotificationAdded
+  NotificationAdded,
+  NotificationScript
 } notification;
 -(void)notify;
 -(void)notifyWithType:(NSNumber *) type;

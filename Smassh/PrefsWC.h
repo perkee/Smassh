@@ -11,13 +11,15 @@
 #import "Supervisor.h"
 #import "Notifiable.h"
 #import "NSDictionary+Hide.h"
+#import "Model.h"
 
 @interface PrefsWC : NSWindowController <NSTableViewDataSource, Notifiable, NSTextFieldDelegate, NSWindowDelegate>
 @property(nonatomic) NSMutableArray *shells;
+@property(nonatomic) Model *model;
 
 @property(nonatomic) id <Supervisor> supervisor;
 
--(id)initWithShells:(NSMutableArray *) someShells;
+-(id)initWithShells:(NSMutableArray *) someShells model:(Model *) aModel;
 
 -(void)activate;
 
@@ -65,5 +67,10 @@
 @property(nonatomic) IBOutlet NSButtonCell *blankButtonCell;
 
 @property(nonatomic) NSArray *normalControls;
+
+//Settings
+@property(nonatomic) IBOutlet NSTextField *scriptField;
+
+-(void)saveSettings;
 
 @end

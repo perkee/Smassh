@@ -37,7 +37,7 @@
   [statusItem setMenu:statusMenu];
   [statusItem setHighlightMode:YES];
   
-  settings = [[PrefsWC alloc] initWithShells:shells];
+  settings = [[PrefsWC alloc] initWithShells:shells model:model];
   [settings setSupervisor:self];
   [[settings window] orderOut:self];
   
@@ -101,6 +101,12 @@
   [shells removeObjectAtIndex:index];
   [self notifyAll];
   [AppDelegate buildMenu:statusMenu withShells:shells];
+}
+
+-(void)setScript:(NSString *)script
+{
+  [[[model config] config] setObject:script forKey:@"script"];
+  [self notifyAllWithType:NotificationScript];
 }
 
 -(void)notifyAll

@@ -13,4 +13,5 @@
 -(void) saveShell:(ShellShortcut *) shell atIndex:(NSUInteger) index;
 -(void) deleteShellAtIndex:(NSUInteger) index;
 -(void) addShell:(ShellShortcut *) shell;
+-(void) setScript:(NSString *) script;
 @end

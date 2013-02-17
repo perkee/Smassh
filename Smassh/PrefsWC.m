@@ -9,11 +9,9 @@
 #import "PrefsWC.h"
 
 @implementation PrefsWC
-{
-  BOOL tableOverflow;
-}
 
 @synthesize shells;
+@synthesize model;
 
 @synthesize textFields;
 @synthesize nickField;
@@ -47,14 +45,17 @@
 
 @synthesize normalControls;
 
+@synthesize scriptField;
+
 #define VERBOSE NO
 #define GOLDEN_RATIO (1.61803)
 
--(id) initWithShells:(NSMutableArray *)someShells
+-(id) initWithShells:(NSMutableArray *)someShells model:(Model *)aModel
 {
   if(self = [super initWithWindowNibName:@"Settings"])
   {
     shells = someShells;
+    model  = aModel;
     [self.window setDelegate:self];
   }
   return self;
@@ -72,7 +73,9 @@
 - (void)windowDidLoad
 {
   [super windowDidLoad];
-
+  
+  //Shells config
+  
   [table setAction:@selector(pick:)];
   [table setDataSource:self];
   [table selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
@@ -125,6 +128,9 @@
                     tableScroller, //dangerous because mixed, but NSDictionary+Hide provides setHidden:
                     nil];
   [self setUsable:([shells count] != 0)];
+  
+  //Settings Config
+  [scriptField setStringValue:[[[model config] config] objectForKey:@"script"]];
 }
 
 - (void) windowDidResignKey:(NSNotification *)notification
@@ -133,6 +139,7 @@
   {
     NSLog(@"window blur.");
   }
+  [self saveSettings];
   [self.window orderOut:self];
 }
 
@@ -232,7 +239,6 @@
 }
 -(void)notifyWithType:(NSNumber *)type
 {
-  [self notify];
   if([type integerValue] == NotificationAdded)
   {
     //select the new value
@@ -241,6 +247,15 @@
     [self pickIndex:index];
     //highlight the nickname field for editing
     [nickField selectText:self];
+    [self notify];
+  }
+  else if([type integerValue] == NotificationScript)
+  {
+    [scriptField setStringValue:[[[model config] config] objectForKey:@"script"]];
+  }
+  else
+  {
+    [self notify];
   }
 }
 
@@ -260,8 +275,11 @@
     count++;
     addedHeight += rowHeight;
     CGFloat totalRowHeight = rowHeight * count;
-    NSLog(@"total row height: %4.0f visible scroll height: %4.0f",totalRowHeight,visibleScrollHeight);
-    NSLog(@"Padding the count to: %lu",(unsigned long)count);
+    if(VERBOSE)
+    {
+      NSLog(@"total row height: %4.0f visible scroll height: %4.0f",totalRowHeight,visibleScrollHeight);
+      NSLog(@"Padding the count to: %lu",(unsigned long)count);
+    }
   }
   return count;
 }
@@ -294,6 +312,11 @@
   {
     [[obj object] setStringValue:[NSString stringWithFormat:@"%ld",value]];
   }
+}
+
+-(void)saveSettings
+{
+  [supervisor setScript:[scriptField stringValue]];
 }
 
 @end

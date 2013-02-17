@@ -102,7 +102,16 @@
   if([type integerValue] == NotificationAdded)
   {
     [config setObject:[self dictFromShells:shells] forKey:@"shells"];
-    //Don't write to disk just yet—the content is guaranteed to be uninsteresting
+    //Don't write to disk just yet—the content is guaranteed to be uninteresting
+  }
+  else if([type integerValue] == NotificationScript)
+  {
+    BOOL couldWrite = [config writeToFile:cfgFile atomically:YES];
+    NSLog(@"New applescript:\n%@",[config objectForKey:@"script"]);
+    if(VERBOSE)
+    {
+      NSLog(@"%@ to config file", couldWrite ? @"Wrote" : @"Didn't write");
+    }
   }
   else
   {
