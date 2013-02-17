@@ -43,6 +43,7 @@
 @synthesize normalControls;
 
 #define VERBOSE NO
+#define GOLDEN_RATIO (1.61803)
 
 -(id) initWithShells:(NSMutableArray *)someShells
 {
@@ -68,7 +69,10 @@
   [super windowDidLoad];
 
   [table setAction:@selector(pick:)];
+  [table setDataSource:self];
   [table selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+  CGFloat tableFontSize = [[[[[table tableColumns] objectAtIndex:0] dataCell] font] pointSize];
+  [table setRowHeight:tableFontSize * GOLDEN_RATIO];
   
   [save  setAction:@selector(save:)];
   [apply setAction:@selector(apply:)];
