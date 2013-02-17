@@ -29,6 +29,7 @@
 @synthesize supervisor;
 @synthesize add;
 @synthesize del;
+@synthesize listButtons;
 
 @synthesize start;
 
@@ -38,6 +39,8 @@
 @synthesize hostLabel;
 @synthesize initLabel;
 @synthesize portLabel;
+
+@synthesize normalControls;
 
 #define VERBOSE NO
 
@@ -104,6 +107,17 @@
                    apply, @"apply",
                    save,  @"save",
                    nil];
+  listButtons   = [NSDictionary dictionaryWithObjectsAndKeys:
+                   add, @"add",
+                   del, @"del",
+                   nil];
+  normalControls = [NSArray arrayWithObjects:
+                    textFields,
+                    labels,
+                    windowButtons,
+                    listButtons,
+                    tableScroller, //dangerous because mixed, but NSDictionary+Hide provides setHidden:
+                    nil];
   [self setUsable:([shells count] != 0)];
 }
 
@@ -195,21 +209,11 @@
 //Allow use of text fields and list
 -(void)setUsable:(BOOL)flag;
 {
-  for(id key in textFields)
+  for(id obj in normalControls)
   {
-    [[textFields objectForKey:key] setHidden:!flag];
+    //extended NSDictionaries to hide all children in NSDictionary+Hide
+    [obj setHidden:!flag];
   }
-  for(id key in labels)
-  {
-    [[labels objectForKey:key] setHidden:!flag];
-  }
-  for(id key in windowButtons)
-  {
-    [[windowButtons objectForKey:key] setHidden:!flag];
-  }
-  [tableScroller setHidden:!flag];
-  [del setHidden:!flag];
-  [add setHidden:!flag];
 }
 
 //Here begin the Notify methods

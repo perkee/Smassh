@@ -10,6 +10,7 @@
 #import "ShellShortcut.h"
 #import "Supervisor.h"
 #import "Notifiable.h"
+#import "NSDictionary+Hide.h"
 
 @interface PrefsWC : NSWindowController <NSTableViewDataSource, Notifiable, NSTextFieldDelegate, NSWindowDelegate>
 @property(nonatomic) NSMutableArray *shells;
@@ -56,8 +57,11 @@
 @property(nonatomic) IBOutlet NSButton *apply;
 @property(nonatomic) IBOutlet NSButton *clear;
 //Buttons for adding/removing to/from shell list
+@property(nonatomic) NSDictionary *listButtons;
 @property(nonatomic) IBOutlet NSButton *add;
 @property(nonatomic) IBOutlet NSButton *del;
 @property(nonatomic) IBOutlet NSButton *start;
+
+@property(nonatomic) NSArray *normalControls;
 
 @end
