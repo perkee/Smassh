@@ -46,10 +46,11 @@
     else
     {
       self.props = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                    @"",@"user",
-                    @"",@"host",
-                    @"",@"init",
-                    @"",@"port",
+                    self.nick,@"nick",
+                    @"",      @"user",
+                    @"",      @"host",
+                    @"",      @"init",
+                    @"",      @"port",
                     nil];
     }
   }
@@ -93,10 +94,6 @@
     prop = [cmdProps objectForKey:@"port"];
     if(prop != nil && [prop isKindOfClass:[NSString class]] && [prop length] > 0)
     {
-      if(VERBOSE)
-      {
-        NSLog(@"Non-empty port: %@", prop);
-      }
       port = [NSString stringWithFormat:@" -p %@ ", prop];
     }
     cmd = [NSString stringWithFormat:@"%@%@%@%@",port,user,host,init];
