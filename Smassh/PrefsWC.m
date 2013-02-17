@@ -9,6 +9,9 @@
 #import "PrefsWC.h"
 
 @implementation PrefsWC
+{
+  BOOL tableOverflow;
+}
 
 @synthesize shells;
 
@@ -73,8 +76,12 @@
   [table setAction:@selector(pick:)];
   [table setDataSource:self];
   [table selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-  CGFloat tableFontSize = [[[[[table tableColumns] objectAtIndex:0] dataCell] font] pointSize];
+  NSCell *genericCell = [[[table tableColumns] objectAtIndex:0] dataCell];
+  CGFloat tableFontSize = [[genericCell font] pointSize];
   [table setRowHeight:tableFontSize * GOLDEN_RATIO];
+  //before row height is set, table thinks it's 100%.
+  //We need to recalc table contents so it can do last row padding with the right row height if necessary
+  [table reloadData];
   
   [save  setAction:@selector(save:)];
   [apply setAction:@selector(apply:)];
@@ -131,7 +138,12 @@
 
 -(void)pick:(id)sender
 {
-  [self pickIndex:[sender selectedRow]];
+  NSUInteger index = [sender selectedRow];
+  if(index >= [shells count])
+  {
+    [sender selectRowIndexes:[NSIndexSet indexSetWithIndex:([shells count] - 1)] byExtendingSelection:NO];
+  }
+  [self pickIndex:index];
 }
 -(void)pickIndex:(NSUInteger) index
 {
@@ -146,6 +158,10 @@
     {
       [textFields setStringValue:@""];
     }
+  }
+  else if(index >= [shells count])
+  {
+    [self pickIndex:([shells count] - 1)];
   }
   else
   {
@@ -209,6 +225,7 @@
 
 -(void)notify
 {
+  NSLog(@"notify");
   [table reloadData];
   NSUInteger count = [shells count];
   [self setUsable:(count != 0)];
@@ -219,7 +236,7 @@
   if([type integerValue] == NotificationAdded)
   {
     //select the new value
-    NSUInteger index = [table numberOfRows] - 1;
+    NSUInteger index = [shells count] - 1;
     [table selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     [self pickIndex:index];
     //highlight the nickname field for editing
@@ -233,12 +250,35 @@
 {
   NSUInteger count = [shells count];
   [start setHidden:(count!=0)];
+  CGFloat buttonHeight = blankButton.frame.size.height + blankButton.frame.origin.y;
+  CGFloat visibleScrollHeight = tableScroller.frame.size.height + tableScroller.frame.origin.y - buttonHeight;
+  CGFloat rowHeight = [table rowHeight];
+  CGFloat totalRowHeight = rowHeight * count;
+  CGFloat addedHeight = tableScroller.frame.origin.y;
+  while(count > 0 && totalRowHeight > visibleScrollHeight && addedHeight < buttonHeight)
+  {
+    count++;
+    addedHeight += rowHeight;
+    CGFloat totalRowHeight = rowHeight * count;
+    NSLog(@"total row height: %4.0f visible scroll height: %4.0f",totalRowHeight,visibleScrollHeight);
+    NSLog(@"Padding the count to: %lu",(unsigned long)count);
+  }
   return count;
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-  return [[shells objectAtIndex:rowIndex] nick];
+  NSUInteger count = [shells count];
+  NSString *r;
+  if(rowIndex >= count)
+  {
+    r = @"";
+  }
+  else
+  {
+    r = [[shells objectAtIndex:rowIndex] nick];
+  }
+  return r;
 }
 
 //textFieldDelegate stuff
