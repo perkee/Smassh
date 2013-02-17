@@ -61,6 +61,8 @@
 @property(nonatomic) IBOutlet NSButton *add;
 @property(nonatomic) IBOutlet NSButton *del;
 @property(nonatomic) IBOutlet NSButton *start;
+@property(nonatomic) IBOutlet NSButton *blankButton;
+@property(nonatomic) IBOutlet NSButtonCell *blankButtonCell;
 
 @property(nonatomic) NSArray *normalControls;
 

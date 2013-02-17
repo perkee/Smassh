@@ -29,6 +29,8 @@
 @synthesize supervisor;
 @synthesize add;
 @synthesize del;
+@synthesize blankButton;
+@synthesize blankButtonCell;
 @synthesize listButtons;
 
 @synthesize start;
@@ -80,6 +82,7 @@
   [add   setAction:@selector(add:)];
   [del   setAction:@selector(del:)];
   [start setAction:@selector(add:)];
+  [blankButtonCell setHighlightsBy:NSNoCellMask];//on click do nothing; it looks like a gradient bar now.
   [portField setDelegate:self];
   [self pickIndex:-1]; //really, pick the first item or nothing if no shells.
   
@@ -105,6 +108,7 @@
   listButtons   = [NSDictionary dictionaryWithObjectsAndKeys:
                    add, @"add",
                    del, @"del",
+                   blankButton, @"blank",
                    nil];
   normalControls = [NSArray arrayWithObjects:
                     textFields,
