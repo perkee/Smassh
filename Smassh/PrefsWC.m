@@ -241,13 +241,13 @@
 {
   if([type integerValue] == NotificationAdded)
   {
+    [self notify];
     //select the new value
     NSUInteger index = [shells count] - 1;
     [table selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
     [self pickIndex:index];
     //highlight the nickname field for editing
     [nickField selectText:self];
-    [self notify];
   }
   else if([type integerValue] == NotificationScript)
   {
