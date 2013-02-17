@@ -334,9 +334,5 @@
       [[obj object] setStringValue:[NSString stringWithFormat:@"%ld",value]];
     }
   }
-  else if([obj object] == self.scriptField)
-  {
-    //NSLog(@"script %@",obj);
-  }
 }
 @end
