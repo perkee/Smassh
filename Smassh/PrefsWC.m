@@ -94,7 +94,6 @@
   [start setAction:@selector(add:)];
   [blankButtonCell setHighlightsBy:NSNoCellMask];//on click do nothing; it looks like a gradient bar now.
   [portField setDelegate:self];
-  [scriptField setDelegate:self];
   [self pickIndex:-1]; //really, pick the first item or nothing if no shells.
   
   textFields    = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -131,7 +130,21 @@
   [self setUsable:([shells count] != 0)];
   
   //Settings Config
-  [scriptField setStringValue:[[[model config] config] objectForKey:@"script"]];
+  [scriptField setString:[[[model config] config] objectForKey:@"script"]];
+  [[scriptField textStorage] setFont:[NSFont fontWithName:@"Menlo" size:11]];
+  NSTextContainer *  container = [scriptField textContainer];
+  [container setWidthTracksTextView: YES];
+  NSSize    size = [container containerSize];
+  size.width = 1.0e3;
+  [container setContainerSize: size];
+  
+  NSScrollView *  scroller = [scriptField enclosingScrollView];
+  [scroller setHasHorizontalScroller: YES];
+  [scroller setAutohidesScrollers:YES];
+  
+  NSRect    frame = [scriptField frame];
+  frame.size.width = 1000.0;
+  [scriptField setFrame: frame];
 }
 
 - (void) windowDidResignKey:(NSNotification *)notification
@@ -252,7 +265,7 @@
   }
   else if([type integerValue] == NotificationScript)
   {
-    [scriptField setStringValue:[[[model config] config] objectForKey:@"script"]];
+    [scriptField setString:[[[model config] config] objectForKey:@"script"]];
   }
   else
   {
@@ -302,7 +315,7 @@
 
 -(void)saveSettings
 {
-  [supervisor setScript:[scriptField stringValue]];
+  [supervisor setScript:[scriptField string]];
 }
 
 //textFieldDelegate stuff
@@ -325,30 +338,5 @@
   {
     //NSLog(@"script %@",obj);
   }
-}
-
-- (BOOL)control:(NSControl*)control textView:(NSTextView*)textView doCommandBySelector:(SEL)commandSelector
-{
-  //NSLog(@"selector\n%@",commandSelector);
-  BOOL result = NO;
-  if(control == scriptField)
-  {
-    if (commandSelector == @selector(insertNewline:))
-    {
-      // new line action:
-      // always insert a line-break character and don’t cause the receiver to end editing
-      [textView insertNewlineIgnoringFieldEditor:self];
-      result = YES;
-    }
-    else if (commandSelector == @selector(insertTab:))
-    {
-      // tab action:
-      // always insert a tab character and don’t cause the receiver to end editing
-      [textView insertTabIgnoringFieldEditor:self];
-      result = YES;
-    }
-  }
-  
-  return result;
 }
 @end

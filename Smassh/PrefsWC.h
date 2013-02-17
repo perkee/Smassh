@@ -69,7 +69,7 @@
 @property(nonatomic) NSArray *normalControls;
 
 //Settings
-@property(nonatomic) IBOutlet NSTextField *scriptField;
+@property (strong) IBOutlet NSTextView *scriptField;
 
 -(void)saveSettings;
 
