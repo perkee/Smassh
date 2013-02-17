@@ -67,15 +67,6 @@
 {
   [super windowDidLoad];
 
-  CGFloat buttonW = 75, buttonH = 30, margin = 10;
-  CGFloat buttonX = self.window.frame.size.width - buttonW - margin;
-  
-  NSRect frame = NSMakeRect(buttonX, margin, buttonW, buttonH);
-  NSButton *button = [[NSButton alloc] initWithFrame:frame];
-  [button setTitle:@"Save"];
-  [button setTarget:self];
-  [button setAction:@selector(save:)];
-
   [table setAction:@selector(pick:)];
   [table selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
   
@@ -145,11 +136,7 @@
     }
     else
     {
-      [nickField setStringValue:@""];
-      [userField setStringValue:@""];
-      [hostField setStringValue:@""];
-      [initField setStringValue:@""];
-      [portField setStringValue:@""];
+      [textFields setStringValue:@""];
     }
   }
   else
@@ -159,11 +146,11 @@
     {
       NSLog(@"display info from shell: %@",[[shells objectAtIndex:index] nick]);
     }
-    [nickField setStringValue:[shell nick]];
-    [userField setStringValue:[[shell props] objectForKey:@"user"]];
-    [hostField setStringValue:[[shell props] objectForKey:@"host"]];
-    [initField setStringValue:[[shell props] objectForKey:@"init"]];
-    [portField setStringValue:[[shell props] objectForKey:@"port"]];
+    for(id key in textFields)
+    {
+      //the shell properties and the text fields are in dictionaries with corresponding keys
+      [[textFields objectForKey:key] setStringValue:[[shell props] objectForKey:key]];
+    }
   }
 }
 
@@ -193,13 +180,7 @@
 -(void)apply:(id)sender
 {
   NSLog(@"apply: %@",sender);
-  ShellShortcut *tmp = [[ShellShortcut alloc] initWithProps:[NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                                             nickField.stringValue, @"nick",
-                                                             userField.stringValue, @"user",
-                                                             hostField.stringValue, @"host",
-                                                             initField.stringValue, @"init",
-                                                             portField.stringValue, @"port",
-                                                             nil]];
+  ShellShortcut *tmp = [[ShellShortcut alloc] initWithProps:[textFields stringValues]];
   [supervisor saveShell:tmp atIndex:[[self table] selectedRow]];
 }
 -(void)clear:(id)sender

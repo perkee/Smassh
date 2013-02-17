@@ -10,4 +10,6 @@
 
 @interface NSDictionary (Hide)
 - (void) setHidden:(BOOL)flag;
+- (void) setStringValue:(NSString *)string;
+- (NSMutableDictionary *) stringValues;
 @end

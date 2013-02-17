@@ -17,5 +17,21 @@
     [[self objectForKey:key] setHidden:flag];
   }
 }
+-(void) setStringValue:(NSString *)string
+{
+  for(id key in self)
+  {
+    [[self objectForKey:key] setStringValue:string];
+  }
+}
+-(NSMutableDictionary *) stringValues
+{
+  NSMutableDictionary *tmp = [[NSMutableDictionary alloc] initWithCapacity:[self count]];
+  for(id key in self)
+  {
+    [tmp setObject:[[self objectForKey:key] stringValue] forKey:key];
+  }
+  return tmp;
+}
 
 @end

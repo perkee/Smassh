@@ -68,7 +68,7 @@
 											<string key="NSFrameSize">{120, 216}</string>
 											<reference key="NSSuperview" ref="405183792"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="860884889"/>
+											<reference key="NSNextKeyView" ref="592942871"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<bool key="NSEnabled">YES</bool>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -110,13 +110,9 @@
 													</object>
 													<object class="NSTextFieldCell" key="NSDataCell" id="887673793">
 														<int key="NSCellFlags">67108928</int>
-														<int key="NSCellFlags2">133120</int>
+														<int key="NSCellFlags2">2112</int>
 														<string key="NSContents">Text Cell</string>
-														<object class="NSFont" key="NSSupport">
-															<string key="NSName">LucidaGrande</string>
-															<double key="NSSize">11</double>
-															<int key="NSfFlags">3100</int>
-														</object>
+														<reference key="NSSupport" ref="463766124"/>
 														<reference key="NSControlView" ref="607274913"/>
 														<object class="NSColor" key="NSBackgroundColor" id="978941527">
 															<int key="NSColorSpace">6</int>
@@ -207,7 +203,7 @@
 							<string key="NSFrame">{{20, 34}, {120, 216}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="592942871"/>
+							<reference key="NSNextKeyView" ref="405183792"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<int key="NSsFlags">150032</int>
 							<reference key="NSVScroller" ref="860884889"/>
@@ -611,7 +607,6 @@
 					<string key="NSFrameSize">{480, 270}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
@@ -2519,7 +2514,6 @@
 						<string key="portLabel">NSTextField</string>
 						<string key="save">NSButton</string>
 						<string key="start">NSButton</string>
-						<string key="starter">NSTextField</string>
 						<string key="table">NSTableView</string>
 						<string key="tableScroller">NSScrollView</string>
 						<string key="userField">NSTextField</string>
@@ -2581,10 +2575,6 @@
 						<object class="IBToOneOutletInfo" key="start">
 							<string key="name">start</string>
 							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="starter">
-							<string key="name">starter</string>
-							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="table">
 							<string key="name">table</string>
