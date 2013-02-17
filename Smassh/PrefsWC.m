@@ -19,8 +19,6 @@
 @synthesize initField;
 @synthesize portField;
 
-@synthesize starter;
-
 @synthesize tableScroller;
 @synthesize table;
 
@@ -31,6 +29,8 @@
 @synthesize supervisor;
 @synthesize add;
 @synthesize del;
+
+@synthesize start;
 
 @synthesize labels;
 @synthesize nickLabel;
@@ -79,8 +79,9 @@
   [save  setAction:@selector(save:)];
   [apply setAction:@selector(apply:)];
   [clear setAction:@selector(clear:)];
-  [add setAction:@selector(add:)];
-  [del setAction:@selector(del:)];
+  [add   setAction:@selector(add:)];
+  [del   setAction:@selector(del:)];
+  [start setAction:@selector(add:)];
   [portField setDelegate:self];
   [self pickIndex:-1]; //really, pick the first item or nothing if no shells.
   
@@ -208,6 +209,7 @@
   }
   [tableScroller setHidden:!flag];
   [del setHidden:!flag];
+  [add setHidden:!flag];
 }
 
 //Here begin the Notify methods
@@ -237,7 +239,7 @@
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
   NSUInteger count = [shells count];
-  [starter setHidden:(count!=0)];
+  [start setHidden:(count!=0)];
   return count;
 }
 

@@ -41,7 +41,6 @@
 @property(nonatomic) IBOutlet NSTextField *hostField;
 @property(nonatomic) IBOutlet NSTextField *initField;
 @property(nonatomic) IBOutlet NSTextField *portField;
-@property(nonatomic) IBOutlet NSTextField *starter; //popover when there are no shells
 
 //labels
 @property(nonatomic) NSDictionary *labels;
@@ -59,5 +58,6 @@
 //Buttons for adding/removing to/from shell list
 @property(nonatomic) IBOutlet NSButton *add;
 @property(nonatomic) IBOutlet NSButton *del;
+@property(nonatomic) IBOutlet NSButton *start;
 
 @end
